@@ -1,0 +1,70 @@
+:root {
+  --max-width: 1280px;
+  --page-padding: 2rem;
+  --accent: #646cffaa;
+  --accent-react: #61dafbaa;
+  --muted: #888;
+  --card-padding: 2em;
+  --logo-height: 6em;
+}
+
+/* Global box-sizing & font smoothing */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Updated root container (responsive padding) */
+#root {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, var(--page-padding));
+  text-align: center;
+}
+
+/* Logo improvements */
+.logo {
+  height: var(--logo-height);
+  padding: 1.5em;
+  will-change: filter, transform;
+  transition: filter 300ms, transform 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em var(--accent));
+  transform: translateY(-2px);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em var(--accent-react));
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .logo, a:nth-of-type(2) .logo { animation: none !important; transition: none !important; transform: none !important; }
+}
+
+/* Keep rotating logo rule for users who allow motion */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Card hover/focus improvements */
+.card {
+  padding: var(--card-padding);
+  transition: box-shadow 200ms, transform 200ms;
+}
+.card:hover, .card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* Read-the-docs color via variable */
+.read-the-docs {
+  color: var(--muted);
+}
+
+/* Keyboard focus outlines */
+:focus:not(:focus-visible) { outline: none; }
+:focus-visible {
+  outline: 3px solid rgba(100,108,255,0.25);
+  outline-offset: 3px;
+}
